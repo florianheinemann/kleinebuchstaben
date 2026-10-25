@@ -5,49 +5,45 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Buchstaben-Dojo</title>
 <meta name="description" content="Kleine Buchstaben spielerisch lernen – mit Ninja, Laternen und Gürteln.">
-<meta name="theme-color" content="#161a35">
+<meta name="theme-color" content="#ffd447">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="abc-Dojo">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px);background:#161a35;-webkit-text-size-adjust:100%}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}html,body,button{touch-action:manipulation}body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}</style>
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px);background:#ffd447;-webkit-text-size-adjust:100%}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}html,body,button{touch-action:manipulation}body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@700&family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
 </head>
 <body>
 <style>
-/* Layout: one centered column (max 560px). Three screens swap in place: Dojo → Training → Ergebnis. A single night-sky world, deliberately one theme. */
+/* Layout: one centered column (max 560px). Three screens swap in place: Dojo → Training → Ergebnis. A single sunny-yellow world, deliberately one theme. */
 :root{
-  --night:#161a35; --night-2:#21264d; --night-3:#2d3366; --line:#414884;
-  --paper:#f5eddc; --paper-2:#d8cdb3; --ink:#1c1a2b; --moon:#efe2c2;
-  --lantern:#ffb24a; --lantern-deep:#c97a1c; --lantern-soft:rgba(255,178,74,.30);
-  --bamboo:#6fd0a0; --bamboo-deep:#3d9a6c; --mist:#b3b8e6; --dim:#7a80b8;
-  --suit:#2f3568; --suit-edge:#8d95e6; --skin:#f3cfa7; --band:#ffb24a; --cap:#5b3b22;
+  /* Light theme on yellow: --night* are the page and panel tones, --ink the text, --paper the white cards. */
+  --night:#ffd447; --night-2:#fff1bf; --night-3:#f3d77e; --line:#dcae2c;
+  --paper:#fffaf0; --paper-2:#e2b42c; --ink:#2b2316; --moon:#fffdf6;
+  --lantern:#ff8f1f; --lantern-deep:#c76400; --lantern-soft:rgba(255,143,31,.30);
+  --bamboo:#6fd0a0; --bamboo-deep:#3d9a6c; --mist:#7d5a0e; --dim:#a7863a;
+  --suit:#2f3568; --suit-edge:#8d95e6; --skin:#f3cfa7; --band:#ff8f1f; --cap:#5b3b22;
   --belt:#f5f3ea; --belt-edge:#bdb8a6;
   --f-display:"Dela Gothic One","Arial Black",Impact,system-ui,sans-serif;
   --f-body:"M PLUS Rounded 1c","Nunito","Trebuchet MS",system-ui,sans-serif;
   /* Letters in school print: single-storey a and g, l and I clearly different. */
   --f-letter:"Andika","Comic Sans MS",system-ui,sans-serif;
-  color-scheme:dark;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html,body{min-height:100%}
 body{
   background-color:var(--night);
   background-image:
-    radial-gradient(1.5px 1.5px at 12% 18%,rgba(245,237,220,.55),transparent 60%),
-    radial-gradient(1px 1px at 78% 9%,rgba(245,237,220,.5),transparent 60%),
-    radial-gradient(1.5px 1.5px at 64% 32%,rgba(245,237,220,.35),transparent 60%),
-    radial-gradient(1px 1px at 30% 44%,rgba(245,237,220,.4),transparent 60%),
-    radial-gradient(1px 1px at 90% 58%,rgba(245,237,220,.35),transparent 60%),
-    radial-gradient(1.5px 1.5px at 6% 72%,rgba(245,237,220,.3),transparent 60%),
-    radial-gradient(120% 60% at 50% 110%,#22285a 0%,transparent 70%);
+    radial-gradient(90% 45% at 50% -10%,rgba(255,255,255,.55) 0%,transparent 70%),
+    radial-gradient(120% 60% at 50% 110%,#ffc22e 0%,transparent 70%);
   background-attachment:fixed;
-  color:var(--paper);
+  color:var(--ink);
   font-family:var(--f-body);font-weight:500;font-size:16px;line-height:1.5;
   padding-left:max(16px,env(safe-area-inset-left,0px));
   padding-right:max(16px,env(safe-area-inset-right,0px));
@@ -70,8 +66,8 @@ button:focus-visible{outline:3px solid var(--lantern);outline-offset:3px}
   box-shadow:0 6px 0 var(--lantern-deep);transition:transform .08s, box-shadow .08s;
 }
 .btn-main:active{transform:translateY(4px);box-shadow:0 2px 0 var(--lantern-deep)}
-.btn-main:disabled{background:var(--night-3);color:var(--dim);box-shadow:0 6px 0 #1c2045;cursor:not-allowed}
-.btn-ghost{font-family:var(--f-display);font-size:1.15rem;background:transparent;border:2px solid var(--line);border-radius:18px;padding:14px 22px;color:var(--paper)}
+.btn-main:disabled{background:var(--night-3);color:var(--dim);box-shadow:0 6px 0 var(--line);cursor:not-allowed}
+.btn-ghost{font-family:var(--f-display);font-size:1.15rem;background:transparent;border:2px solid var(--line);border-radius:18px;padding:14px 22px;color:var(--ink)}
 .label{font-weight:800;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:var(--mist);margin:0}
 
 /* ---------- ninja ---------- */
@@ -86,8 +82,8 @@ button:focus-visible{outline:3px solid var(--lantern);outline-offset:3px}
 /* ---------- dojo ---------- */
 .hero{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center}
 .moon{position:relative;width:150px;height:150px;border-radius:50%;
-  background:radial-gradient(circle at 38% 35%,var(--moon) 0%,#e2d2ab 60%,#cdbb90 100%);
-  box-shadow:0 0 50px rgba(239,226,194,.25)}
+  background:radial-gradient(circle at 38% 35%,var(--moon) 0%,#fff3cf 60%,#ffe39a 100%);
+  box-shadow:0 0 50px rgba(255,255,255,.7)}
 .moon .ninja{position:absolute;left:50%;bottom:-6px;width:112px;transform:translateX(-50%)}
 .moon .ninja.hop{animation:none}
 .belt-card{display:flex;flex-direction:column;gap:8px;min-width:0}
@@ -125,7 +121,7 @@ details.parents summary::-webkit-details-marker{display:none}
 details.parents summary::after{content:"+";font-family:var(--f-display);font-size:1.2rem}
 details.parents[open] summary::after{content:"–"}
 details.parents ul{margin:12px 0 4px;padding-left:20px;display:flex;flex-direction:column;gap:8px;max-width:65ch}
-details.parents li{color:var(--paper)}
+details.parents li{color:var(--ink)}
 .reset-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
 .reset-row button{background:transparent;border:2px solid var(--line);border-radius:10px;padding:6px 12px;font-weight:700;font-size:.85rem;color:var(--mist)}
 .reset-row .danger{border-color:var(--lantern);color:var(--lantern)}
@@ -178,9 +174,9 @@ details.parents li{color:var(--paper)}
 .pic{display:flex;align-items:center;gap:14px}
 .pic .emo{font-size:3.2rem;line-height:1;flex:none}
 .pic .word{font-family:var(--f-letter);font-weight:700;font-size:2.2rem;line-height:1.1;letter-spacing:.03em;overflow-wrap:anywhere}
-.pic .word b{color:var(--lantern)}
+.pic .word b{color:var(--lantern-deep)}
 
-.shuriken-fly{position:fixed;left:0;top:0;width:26px;height:26px;pointer-events:none;z-index:50;color:#e3e5f5}
+.shuriken-fly{position:fixed;left:0;top:0;width:26px;height:26px;pointer-events:none;z-index:50;color:var(--suit)}
 
 /* ---------- result ---------- */
 .result-head{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
@@ -192,7 +188,7 @@ details.parents li{color:var(--paper)}
 .stat b{font-family:var(--f-display);font-size:1.8rem;line-height:1.1;font-weight:400;font-variant-numeric:tabular-nums}
 .stat span{font-weight:700;font-size:.82rem;color:var(--mist);line-height:1.3}
 .stat.hl{border-color:var(--lantern)}
-.stat.hl b{color:var(--lantern)}
+.stat.hl b{color:var(--lantern-deep)}
 .note{background:var(--paper);color:var(--ink);border-radius:16px;padding:14px 16px;font-weight:700}
 .note p{margin:0}
 .note p + p{margin-top:6px}
@@ -208,12 +204,12 @@ details.parents li{color:var(--paper)}
 /* ---------- grandmaster (all 30 shuriken, kept for good) ---------- */
 .ninja .crown{display:none}
 body.master .ninja .crown{display:inline}
-body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
-.master-badge{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:linear-gradient(135deg,#3b3014,var(--night-2) 70%);border:2px solid #ffd84a;border-radius:16px;padding:10px 14px;font-weight:800;color:#ffe9a0;box-shadow:0 0 24px rgba(255,216,74,.22)}
+body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
+.master-badge{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:linear-gradient(135deg,#fff7d6,var(--night-2) 70%);border:2px solid #c9a21f;border-radius:16px;padding:10px 14px;font-weight:800;color:#6b4d00;box-shadow:0 0 24px rgba(255,255,255,.6)}
 .master-badge svg{width:30px;height:30px;flex:none}
 .master-badge small{display:block;font-weight:700;color:var(--mist);font-size:.82rem}
 .finale{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
-.finale h2{font-family:var(--f-display);font-size:clamp(2.2rem,10vw,3.2rem);line-height:1;margin:0;color:#ffd84a;text-shadow:0 0 24px rgba(255,216,74,.45)}
+.finale h2{font-family:var(--f-display);font-size:clamp(2.2rem,10vw,3.2rem);line-height:1;margin:0;color:#b87800;text-shadow:0 0 24px rgba(255,255,255,.9)}
 .finale p{margin:0;font-weight:700;color:var(--mist);max-width:36ch}
 .finale .moon{width:190px;height:190px;border:none;padding:0;cursor:pointer}
 .finale .moon .ninja{width:140px}
@@ -402,7 +398,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   let muted = !!store.get('buchstaben.muted', false);
   let master = store.get('buchstaben.master', null);   // {date, name}: set once all 30 shuriken are reached, never lost by mistakes
 
-  const VERSION = '1.0.0';
+  const VERSION = '1.0.1';
 
   // No zooming: iOS ignores user-scalable=no, so also block pinch gestures (double-tap zoom is off via touch-action).
   ['gesturestart','gesturechange','gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive:false }));

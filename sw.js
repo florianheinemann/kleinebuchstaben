@@ -1,6 +1,6 @@
 // Offline support: app files network-first (so updates arrive), fonts cache-first.
 const PREFIX = 'buchstaben-';
-const CACHE = PREFIX + '1.0.0';
+const CACHE = PREFIX + '1.0.1';
 const APP = ['./', 'index.html', 'manifest.webmanifest', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
