@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Einmaleins-Dojo</title>
+<title>Buchstaben-Dojo</title>
 <meta name="description" content="Das kleine Einmaleins spielerisch üben – mit Ninja, Laternen und Gürteln.">
 <meta name="theme-color" content="#161a35">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="1×1-Dojo">
+<meta name="apple-mobile-web-app-title" content="abc-Dojo">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -399,18 +399,18 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
   };
 
-  let levels = store.get('dojo.levels', {}) || {};
-  let selected = store.get('dojo.sel', [2,5,10]);
+  let levels = store.get('buchstaben.levels', {}) || {};
+  let selected = store.get('buchstaben.sel', [2,5,10]);
   if (!Array.isArray(selected) || !selected.length) selected = [2,5,10];
-  let muted = !!store.get('dojo.muted', false);
-  let master = store.get('dojo.master', null);   // {date, name}: set once all 30 shuriken are reached, never lost by mistakes
+  let muted = !!store.get('buchstaben.muted', false);
+  let master = store.get('buchstaben.master', null);   // {date, name}: set once all 30 shuriken are reached, never lost by mistakes
 
   const VERSION = '1.2.4';
 
   // No zooming: iOS ignores user-scalable=no, so also block pinch gestures (double-tap zoom is off via touch-action).
   ['gesturestart','gesturechange','gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive:false }));
   document.addEventListener('touchmove', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive:false });
-  $('#appVersion').textContent = `Einmaleins-Dojo · Version ${VERSION} · ↻ Neu laden`;
+  $('#appVersion').textContent = `Buchstaben-Dojo · Version ${VERSION} · ↻ Neu laden`;
   // Home-screen apps on iOS have no reload button: bypass the HTTP cache, refresh the service worker, then reload.
   $('#appVersion').addEventListener('click', async e => {
     e.currentTarget.textContent = 'Lädt neu …';
@@ -485,13 +485,13 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   const SPK_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6L8 10z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>';
   const SPK_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6L8 10z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>';
   function renderSound(){ $$('.sound-btn').forEach(b => { b.innerHTML = (muted ? SPK_OFF : SPK_ON) + (muted ? 'Aus' : 'Ton'); }); }
-  $$('.sound-btn').forEach(b => b.addEventListener('click', () => { muted = !muted; store.set('dojo.muted', muted); renderSound(); if(!muted) sfx.ok(); }));
+  $$('.sound-btn').forEach(b => b.addEventListener('click', () => { muted = !muted; store.set('buchstaben.muted', muted); renderSound(); if(!muted) sfx.ok(); }));
   renderSound();
 
   /* ---------- knowledge model ---------- */
   const fkey = (a,b) => a < b ? `${a}x${b}` : `${b}x${a}`;
   const lvl = (a,b) => levels[fkey(a,b)] || 0;
-  const setLvl = (key, v) => { levels[key] = Math.max(0, Math.min(3, v)); store.set('dojo.levels', levels); };
+  const setLvl = (key, v) => { levels[key] = Math.max(0, Math.min(3, v)); store.set('buchstaben.levels', levels); };
   function rowSum(r){ let s = 0; for (let k=1;k<=10;k++) s += lvl(r,k); return s; }
   function starsFor(r){ return Math.min(3, Math.floor(rowSum(r)/9)); }
   // Fractional shuriken (0–3) so progress shows before a whole shuriken is earned.
@@ -772,7 +772,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   function checkMaster(){
     if (master || totalStars() < GOLD.min) return false;
     master = { date: new Date().toISOString(), name: '' };
-    store.set('dojo.master', master);
+    store.set('buchstaben.master', master);
     return true;
   }
   const CROWN = '<svg viewBox="0 0 30 24" aria-hidden="true"><path d="M2 21 L4 5 L10 12 L15 2 L20 12 L26 5 L28 21 Z" fill="#ffd84a" stroke="#c9a21f" stroke-width="1.6" stroke-linejoin="round"/></svg>';
@@ -786,7 +786,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     sfx.fanfare();
     fireworks(5000);
   }
-  $('#masterName').addEventListener('input', e => { master.name = e.target.value.trim(); store.set('dojo.master', master); });
+  $('#masterName').addEventListener('input', e => { master.name = e.target.value.trim(); store.set('buchstaben.master', master); });
   $('#masterMoon').addEventListener('click', () => {
     const n = $('#ninjaMaster'); n.classList.remove('hop'); void n.offsetWidth; n.classList.add('hop');
     fireworks(2500);
@@ -839,12 +839,12 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     b.innerHTML = `<span class="n">${r}</span><span class="er">${r}er</span><span class="stars"></span><span class="prog" aria-hidden="true"><i></i></span>`;
     b.addEventListener('click', () => {
       selected = selected.includes(r) ? selected.filter(x => x !== r) : [...selected, r].sort((x,y)=>x-y);
-      store.set('dojo.sel', selected); renderDojo();
+      store.set('buchstaben.sel', selected); renderDojo();
     });
     tiles.appendChild(b);
   }
   $$('.chip').forEach(c => c.addEventListener('click', () => {
-    selected = c.dataset.set.split(',').map(Number); store.set('dojo.sel', selected); renderDojo();
+    selected = c.dataset.set.split(',').map(Number); store.set('buchstaben.sel', selected); renderDojo();
   }));
 
   function renderDojo(){
@@ -887,7 +887,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
       ? '<span style="font-weight:700">Wirklich alle Shuriken und Gürtel löschen' + (master ? ', auch den goldenen' : '') + '?</span><button type="button" class="danger" id="resetYes">Ja, löschen</button><button type="button" id="resetNo">Abbrechen</button>'
       : '<button type="button" id="resetAsk">Fortschritt zurücksetzen</button>';
     if (confirming){
-      $('#resetYes').addEventListener('click', () => { levels = {}; store.set('dojo.levels', levels); master = null; store.set('dojo.master', null); renderDojo(); renderReset(false); });
+      $('#resetYes').addEventListener('click', () => { levels = {}; store.set('buchstaben.levels', levels); master = null; store.set('buchstaben.master', null); renderDojo(); renderReset(false); });
       $('#resetNo').addEventListener('click', () => renderReset(false));
     } else {
       $('#resetAsk').addEventListener('click', () => renderReset(true));

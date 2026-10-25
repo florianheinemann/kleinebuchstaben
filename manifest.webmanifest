@@ -1,6 +1,6 @@
 {
-  "name": "Einmaleins-Dojo",
-  "short_name": "1×1-Dojo",
+  "name": "Buchstaben-Dojo",
+  "short_name": "abc-Dojo",
   "lang": "de",
   "start_url": "./",
   "scope": "./",
