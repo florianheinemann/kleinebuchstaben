@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Buchstaben-Dojo</title>
-<meta name="description" content="Das kleine Einmaleins spielerisch üben – mit Ninja, Laternen und Gürteln.">
+<meta name="description" content="Kleine Buchstaben spielerisch lernen – mit Ninja, Laternen und Gürteln.">
 <meta name="theme-color" content="#161a35">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -16,7 +16,7 @@
 <style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px);background:#161a35;-webkit-text-size-adjust:100%}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}html,body,button{touch-action:manipulation}body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@700&family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
 </head>
 <body>
 <style>
@@ -30,6 +30,8 @@
   --belt:#f5f3ea; --belt-edge:#bdb8a6;
   --f-display:"Dela Gothic One","Arial Black",Impact,system-ui,sans-serif;
   --f-body:"M PLUS Rounded 1c","Nunito","Trebuchet MS",system-ui,sans-serif;
+  /* Letters in school print: single-storey a and g, l and I clearly different. */
+  --f-letter:"Andika","Comic Sans MS",system-ui,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -98,8 +100,8 @@ button:focus-visible{outline:3px solid var(--lantern);outline-offset:3px}
 .tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
 .tile{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--night-2);border:2px solid var(--line);border-radius:14px;padding:10px 2px 8px;transition:background .15s,transform .1s}
 .tile:active{transform:scale(.96)}
-.tile .n{font-family:var(--f-display);font-size:1.7rem;line-height:1}
-.tile .er{font-weight:800;font-size:.72rem;color:var(--mist);letter-spacing:.04em}
+.tile .n{font-family:var(--f-letter);font-weight:700;font-size:1.45rem;line-height:1;white-space:nowrap;letter-spacing:.04em}
+.tile .er{font-family:var(--f-letter);font-weight:700;font-size:.8rem;color:var(--mist);letter-spacing:.08em;white-space:nowrap}
 .tile .stars{display:flex;gap:2px}
 .tile .stars svg{width:13px;height:13px;color:var(--night-3)}
 .tile .stars svg.on{color:var(--lantern)}
@@ -151,14 +153,14 @@ details.parents li{color:var(--paper)}
 .bubble::before{content:"";position:absolute;left:-9px;bottom:14px;width:14px;height:14px;background:var(--night-2);border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(45deg)}
 
 .card{position:relative;background:var(--paper);color:var(--ink);border-radius:22px;padding:30px 16px 24px;box-shadow:0 8px 0 var(--paper-2)}
-.eq{display:flex;justify-content:center;align-items:center;gap:.22em;white-space:nowrap;font-family:var(--f-display);font-size:clamp(2rem,8.5vw,3.4rem);line-height:1;font-variant-numeric:tabular-nums}
-.eq .op{color:#8a7f66}
+.eq{display:flex;justify-content:center;align-items:center;gap:.3em;white-space:nowrap;font-family:var(--f-letter);font-weight:700;font-size:clamp(3.4rem,16vw,5rem);line-height:1}
+.eq .op{color:#8a7f66;font-family:var(--f-display);font-size:.55em}
 .slot{display:inline-flex;justify-content:center;align-items:center;min-width:1.7em;height:1.35em;border:4px dashed #b9ad92;border-radius:14px;color:#b9ad92}
 .slot.filled{border:4px solid var(--bamboo-deep);background:var(--bamboo);color:var(--ink)}
 .tag{position:absolute;top:10px;left:12px;background:var(--ink);color:var(--lantern);font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:99px}
 
 .answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.ans{min-height:88px;background:var(--paper);color:var(--ink);border:3px solid transparent;border-radius:18px;font-family:var(--f-display);font-size:clamp(1.9rem,8vw,2.6rem);font-variant-numeric:tabular-nums;box-shadow:0 6px 0 var(--paper-2);transition:transform .08s,box-shadow .08s,background .2s}
+.ans{min-height:88px;background:var(--paper);color:var(--ink);border:3px solid transparent;border-radius:18px;font-family:var(--f-letter);font-weight:700;font-size:clamp(2.6rem,11vw,3.4rem);line-height:1;box-shadow:0 6px 0 var(--paper-2);transition:transform .08s,box-shadow .08s,background .2s}
 .ans:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 var(--paper-2)}
 .ans.tried{background:var(--night-2);color:var(--dim);border:3px dashed var(--line);box-shadow:none;cursor:default}
 .ans.right{background:var(--bamboo);border-color:var(--bamboo-deep);box-shadow:0 6px 0 var(--bamboo-deep)}
@@ -173,14 +175,10 @@ details.parents li{color:var(--paper)}
 .hint{background:var(--night-2);border:2px solid var(--line);border-radius:18px;padding:14px 14px 16px;display:flex;flex-direction:column;gap:12px}
 .hint .trick{margin:0;font-weight:800;font-size:1.1rem;line-height:1.4}
 .hint .sub{margin:0;color:var(--mist);font-weight:700;font-size:.9rem}
-.grid{display:flex;flex-direction:column;gap:3px;overflow-x:auto;padding-bottom:2px}
-.grid .row{display:flex;align-items:center;gap:3px}
-.grid .row:nth-child(5){margin-bottom:7px}
-.grid .dot{width:var(--d,16px);height:var(--d,16px);border-radius:50%;background:var(--lantern);flex:none}
-.grid .dot.b{background:var(--bamboo)}
-.grid .dot:nth-child(5){margin-right:7px}
-.grid .sum{margin-left:8px;font-family:var(--f-display);font-size:.85rem;color:var(--mist);font-variant-numeric:tabular-nums;min-width:2.4em}
-.grid .row:last-child .sum{color:var(--lantern)}
+.pic{display:flex;align-items:center;gap:14px}
+.pic .emo{font-size:3.2rem;line-height:1;flex:none}
+.pic .word{font-family:var(--f-letter);font-weight:700;font-size:2.2rem;line-height:1.1;letter-spacing:.03em;overflow-wrap:anywhere}
+.pic .word b{color:var(--lantern)}
 
 .shuriken-fly{position:fixed;left:0;top:0;width:26px;height:26px;pointer-events:none;z-index:50;color:#e3e5f5}
 
@@ -231,11 +229,11 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
 .app-footer button{background:transparent;border:none;padding:8px 12px;color:var(--dim);font-size:.75rem;font-weight:700;letter-spacing:.04em}
 
 @media (max-width:420px){
+  .tile .n{font-size:1.15rem}
   .hero{grid-template-columns:120px 1fr}
   .moon{width:120px;height:120px}
   .moon .ninja{width:92px}
   .belt-name{font-size:1.3rem}
-  .tile .n{font-size:1.45rem}
   .result-head{grid-template-columns:90px 1fr}
   .result-head .ninja{width:90px}
   .result-head h2{font-size:1.5rem}
@@ -251,13 +249,13 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   <!-- ============ DOJO ============ -->
   <section class="screen" id="dojo">
     <div class="topbar">
-      <h1 class="brand"><small>Kleines Einmaleins</small>Einmaleins-Dojo</h1>
+      <h1 class="brand"><small>Kleine Buchstaben</small>Buchstaben-Dojo</h1>
       <button type="button" class="icon-btn sound-btn" aria-label="Ton an oder aus"></button>
     </div>
 
     <button type="button" class="master-badge" id="masterBadge" hidden>
       <span class="crown-ico"></span>
-      <span>Goldener Gürtel · Großmeister<small id="masterSince"></small></span>
+      <span>Goldener Gürtel · Großmeisterin<small id="masterSince"></small></span>
     </button>
 
     <div class="hero">
@@ -271,12 +269,12 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     </div>
 
     <div style="display:flex;flex-direction:column;gap:10px">
-      <p class="label">Welche Reihen trainierst du?</p>
+      <p class="label">Welche Buchstaben trainierst du?</p>
       <div class="tiles" id="tiles"></div>
       <div class="chips">
-        <button type="button" class="chip" data-set="2,5,10">Start: 2 · 5 · 10</button>
-        <button type="button" class="chip" data-set="3,4,6,7,8,9">Profi: 3 4 6 7 8 9</button>
-        <button type="button" class="chip" data-set="1,2,3,4,5,6,7,8,9,10">Alle Reihen</button>
+        <button type="button" class="chip" data-set="1,2,3">Start: gleiche Form</button>
+        <button type="button" class="chip" data-set="7,8,9">Profi: ganz anders</button>
+        <button type="button" class="chip" data-set="1,2,3,4,5,6,7,8,9,10">Alle Buchstaben</button>
       </div>
     </div>
 
@@ -288,13 +286,13 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     <details class="parents">
       <summary>Für Eltern: So lernt das Dojo</summary>
       <ul>
-        <li>Fehler kosten nichts. Es gibt keine Leben und keine roten Kreuze. Nach einem Fehler zeigt der Ninja einen Rechentrick und ein Punktefeld, dann darf man nochmal.</li>
-        <li>Die falschen Antworten sind typische Verwechsler: Nachbaraufgaben wie 7 · 7 oder 6 · 8 statt 7 · 8 und andere Ergebnisse aus dem Einmaleins. Raten hilft kaum, Nachdenken schon.</li>
-        <li>Eine falsch gelöste Aufgabe kommt zwei, drei Aufgaben später als „Comeback-Chance“ zurück. Trifft er sie dann, zählt das als Comeback. So wird aus dem Fehler ein Erfolg, den er sieht.</li>
-        <li>Aufgaben, die noch nicht sitzen, kommen häufiger dran. Tauschaufgaben wie 3 · 7 und 7 · 3 zählen als eine.</li>
-        <li>Shuriken (bis zu 3 pro Reihe) zeigen, wie sicher eine Reihe sitzt. Sie wachsen bei Treffern im ersten Versuch. Genug Shuriken bringen den nächsten Gürtel.</li>
-        <li>Mit allen 30 Shuriken gibt es den goldenen Gürtel und eine Großmeister-Urkunde. Der bleibt für immer, auch wenn später mal ein Shuriken verloren geht. Nur „Fortschritt zurücksetzen“ löscht ihn.</li>
-        <li>Bewährte Reihenfolge: 2, 5, 10, dann 4 und 3, dann 9, zum Schluss 6, 8 und 7.</li>
+        <li>Oben steht ein kleiner Buchstabe, darunter vier große. Sie tippt den großen Buchstaben an, der dazu gehört.</li>
+        <li>Die zehn Felder sind Buchstaben-Gruppen, sortiert von leicht nach schwer: Zuerst kommen Buchstaben, die klein fast genauso aussehen wie groß (c → C, o → O). Danach welche, die nur ähnlich sind (i, l, t, f, m, n). Am Ende die, die ganz anders aussehen (a, e, r, g, h), die Spiegel-Buchstaben b, d, q und die Umlaute.</li>
+        <li>Die falschen Antworten sind typische Verwechsler: bei b etwa D, P und Q, bei l das große I. Raten hilft kaum, genau Hinschauen schon.</li>
+        <li>Fehler kosten nichts. Nach einem Fehler zeigt der Ninja ein Bild mit Anlaut, zum Beispiel 🐒 Affe für a. Beim zweiten Fehler leuchtet die richtige Antwort.</li>
+        <li>Ein falsch gelöster Buchstabe kommt zwei, drei Aufgaben später als „Comeback-Chance“ zurück. Trifft sie ihn dann, zählt das als Comeback.</li>
+        <li>Buchstaben, die noch nicht sitzen, kommen häufiger dran. Shuriken (bis zu 3 pro Gruppe) zeigen, wie sicher eine Gruppe sitzt. Pro Runde kann jeder Buchstabe nur einmal dazulernen, damit die Shuriken nicht in einer einzigen Runde voll werden.</li>
+        <li>Mit allen 30 Shuriken gibt es den goldenen Gürtel und eine Großmeisterin-Urkunde. Der bleibt für immer. Nur „Fortschritt zurücksetzen“ löscht ihn.</li>
         <li>Der Fortschritt bleibt in diesem Browser auf diesem Gerät gespeichert.</li>
       </ul>
       <div class="reset-row" id="resetRow">
@@ -318,7 +316,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
 
     <div class="say">
       <div class="ninja" id="ninjaSmall"></div>
-      <div class="bubble" id="bubble" aria-live="polite">Welche Zahl trifft?</div>
+      <div class="bubble" id="bubble" aria-live="polite">Welcher große Buchstabe passt?</div>
     </div>
 
     <div class="card">
@@ -329,12 +327,11 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     <div class="answers" id="answers"></div>
 
     <button type="button" class="trick-btn" id="trickBtn">
-      <span class="shu-ico"></span> Ninja-Trick zeigen
+      <span class="shu-ico"></span> Ninja-Tipp zeigen
     </button>
     <div class="hint" id="hint" hidden>
-      <p class="trick" id="trickText"></p>
-      <div class="grid" id="grid"></div>
-      <p class="sub" id="gridText"></p>
+      <div class="pic"><span class="emo" id="hintEmo" aria-hidden="true"></span><span class="word" id="hintWord"></span></div>
+      <p class="sub" id="hintText"></p>
     </div>
   </section>
 
@@ -369,15 +366,15 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   <section class="screen" id="master" hidden>
     <div class="finale">
       <p class="label">Alle 30 Shuriken</p>
-      <h2>Großmeister!</h2>
+      <h2>Großmeisterin!</h2>
       <button type="button" class="moon" id="masterMoon" aria-label="Feuerwerk"><span class="ninja" id="ninjaMaster"></span></button>
-      <p>Du kannst das ganze kleine Einmaleins. Jede Reihe, jede Aufgabe. Den goldenen Gürtel behältst du für immer.</p>
+      <p>Du kennst alle kleinen Buchstaben. Jeden einzelnen. Den goldenen Gürtel behältst du für immer.</p>
     </div>
     <div class="cert">
       <p class="label">Urkunde</p>
-      <h3>Großmeister des Einmaleins</h3>
+      <h3>Großmeisterin der Buchstaben</h3>
       <input id="masterName" maxlength="24" placeholder="Dein Name" aria-label="Dein Name" autocomplete="off">
-      <p>trägt den goldenen Gürtel des Einmaleins-Dojos.</p>
+      <p>trägt den goldenen Gürtel des Buchstaben-Dojos.</p>
       <p class="date" id="masterDate"></p>
     </div>
     <p class="hint-txt" style="margin:0;text-align:center;color:var(--mist);font-weight:700">Tipp auf den Mond für noch ein Feuerwerk!</p>
@@ -400,12 +397,12 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   };
 
   let levels = store.get('buchstaben.levels', {}) || {};
-  let selected = store.get('buchstaben.sel', [2,5,10]);
-  if (!Array.isArray(selected) || !selected.length) selected = [2,5,10];
+  let selected = store.get('buchstaben.sel', [1,2,3]);
+  if (!Array.isArray(selected) || !selected.length) selected = [1,2,3];
   let muted = !!store.get('buchstaben.muted', false);
   let master = store.get('buchstaben.master', null);   // {date, name}: set once all 30 shuriken are reached, never lost by mistakes
 
-  const VERSION = '1.2.4';
+  const VERSION = '1.0.0';
 
   // No zooming: iOS ignores user-scalable=no, so also block pinch gestures (double-tap zoom is off via touch-action).
   ['gesturestart','gesturechange','gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive:false }));
@@ -488,16 +485,37 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   $$('.sound-btn').forEach(b => b.addEventListener('click', () => { muted = !muted; store.set('buchstaben.muted', muted); renderSound(); if(!muted) sfx.ok(); }));
   renderSound();
 
+  /* ---------- letters ---------- */
+  // Ten groups, easy to hard: same shape small and big, similar, completely different, mirror letters, umlauts.
+  const GROUPS = { 1:'cos', 2:'uvw', 3:'xzk', 4:'pjy', 5:'ilt', 6:'fmn', 7:'aer', 8:'gh', 9:'bdq', 10:'äöü' };
+  // Distractors: capitals a child is likely to mistake for the right one (shape of the small letter, mirror images, I for l).
+  const CONF = {
+    a:'OEDQ', b:'DPQH', c:'OGES', d:'BPQO', e:'OCAF', f:'TEPI', g:'QJPY', h:'NKBM', i:'LJTY',
+    j:'IYLG', k:'HXRY', l:'IJTH', m:'NWHU', n:'MHUR', o:'QCDU', p:'BDQR', q:'PBDG', r:'NPFT',
+    s:'ZCGB', t:'FLIJ', u:'VNWO', v:'UYWA', w:'VMUN', x:'KYZT', y:'VJXG', z:'SNXK',
+    'ä':'AÖOÜ', 'ö':'OÜÄQ', 'ü':'UÄÖV'
+  };
+  // Picture word for the hint: the word starts with the letter.
+  const WORDS = {
+    a:['🐒','Affe'], b:['⚽','Ball'], c:['🤡','Clown'], d:['🦕','Dino'], e:['🦆','Ente'], f:['🐟','Fisch'],
+    g:['🦒','Giraffe'], h:['🐶','Hund'], i:['🦔','Igel'], j:['🪀','Jojo'], k:['🐱','Katze'], l:['🦁','Löwe'],
+    m:['🐭','Maus'], n:['👃','Nase'], o:['👵','Oma'], p:['🐧','Pinguin'], q:['🪼','Qualle'], r:['🚀','Rakete'],
+    s:['☀️','Sonne'], t:['🐯','Tiger'], u:['🦉','Uhu'], v:['🐦','Vogel'], w:['🐳','Wal'], x:['🎼','Xylofon'],
+    y:['🧘','Yoga'], z:['🦓','Zebra'], 'ä':['🍎','Äpfel'], 'ö':['🛢️','Öl'], 'ü':['🎁','Überraschung']
+  };
+  const up = c => c.toUpperCase();
+  const spaced = (g, f = x => x) => [...GROUPS[g]].map(f).join(' ');
+
   /* ---------- knowledge model ---------- */
-  const fkey = (a,b) => a < b ? `${a}x${b}` : `${b}x${a}`;
-  const lvl = (a,b) => levels[fkey(a,b)] || 0;
-  const setLvl = (key, v) => { levels[key] = Math.max(0, Math.min(3, v)); store.set('buchstaben.levels', levels); };
-  function rowSum(r){ let s = 0; for (let k=1;k<=10;k++) s += lvl(r,k); return s; }
-  function starsFor(r){ return Math.min(3, Math.floor(rowSum(r)/9)); }
+  const lvl = c => levels[c] || 0;
+  const setLvl = (c, v) => { levels[c] = Math.max(0, Math.min(3, v)); store.set('buchstaben.levels', levels); };
+  function rowSum(g){ let s = 0; for (const c of GROUPS[g]) s += lvl(c); return s; }
+  // Like the 1×1: 90 % of the maximum (3 per letter) gives all 3 shuriken.
+  function rowProgress(g){ return Math.min(3, rowSum(g) / (GROUPS[g].length * .9) + 1e-9); }
+  function starsFor(g){ return Math.floor(rowProgress(g)); }
   // Fractional shuriken (0–3) so progress shows before a whole shuriken is earned.
-  function rowProgress(r){ return Math.min(3, rowSum(r)/9); }
-  function nextFrac(r){ const p = rowProgress(r); return p >= 3 ? 1 : p - Math.floor(p); }
-  function totalStars(){ let t = 0; for (let r=1;r<=10;r++) t += starsFor(r); return t; }
+  function nextFrac(g){ const p = rowProgress(g); return p >= 3 ? 1 : p - Math.floor(p); }
+  function totalStars(){ let t = 0; for (let g=1;g<=10;g++) t += starsFor(g); return t; }
   function beltFor(t){ if (master) return GOLD; let b = BELTS[0]; for (const x of BELTS) if (t >= x.min) b = x; return b; }
   function applyBelt(b){
     const s = document.documentElement.style; s.setProperty('--belt', b.color); s.setProperty('--belt-edge', b.edge);
@@ -507,70 +525,35 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
   const pickOne = a => a[Math.floor(Math.random()*a.length)];
 
-  const PRODUCTS = [...new Set(Array.from({length:100},(_,i)=>(Math.floor(i/10)+1)*(i%10+1)))];
-
-  // Distractors: neighbour tasks first (one factor off by one), then nearby results from the table.
-  function makeOptions(r,k){
-    const c = r*k, used = new Set([c]), picks = [];
-    const ok = v => Number.isInteger(v) && v > 0 && v <= 100 && !used.has(v);
-    const add = v => { used.add(v); picks.push(v); };
-    for (const v of shuffle([r*(k-1), r*(k+1), (r-1)*k, (r+1)*k])) { if (picks.length >= 2) break; if (ok(v)) add(v); }
-    const near = PRODUCTS.filter(p => p !== c).sort((x,y) => Math.abs(x-c) - Math.abs(y-c)).slice(0,5);
-    for (const v of shuffle(near)) { if (picks.length >= 3) break; if (ok(v)) add(v); }
-    for (const v of near) { if (picks.length >= 3) break; if (ok(v)) add(v); }
-    let d = 1; while (picks.length < 3) { for (const v of [c+d, c-d]) if (picks.length < 3 && ok(v)) add(v); d++; }
-    return shuffle([c, ...picks]);
-  }
-
-  // Strategy hint: m groups of n. Pick the factor that gives the easiest strategy as m.
-  const PRI = [1,2,10,5,9,4,3,6,8,7];
-  function trick(a,b){
-    let m, n;
-    if (PRI.indexOf(a) <= PRI.indexOf(b)) { m=a; n=b; } else { m=b; n=a; }
-    const T = {
-      1: `1 · ${n} ist einfach ${n}.`,
-      2: `Verdopple die ${n}. Also ${n} + ${n}.`,
-      10:`10 · ${n}: Hänge an die ${n} eine Null an.`,
-      5: `Rechne erst 10 · ${n} = ${10*n}. Davon die Hälfte.`,
-      9: `Rechne 10 · ${n} = ${10*n}. Dann einmal ${n} weniger.`,
-      4: `Verdopple die ${n}: das ist ${2*n}. Dann nochmal verdoppeln.`,
-      3: `2 · ${n} = ${2*n}. Dann noch einmal ${n} dazu.`,
-      6: `5 · ${n} = ${5*n}. Dann noch einmal ${n} dazu.`,
-      7: `5 · ${n} = ${5*n}. Dann noch 2 · ${n} = ${2*n} dazu.`,
-      8: `10 · ${n} = ${10*n}. Dann 2 · ${n} = ${2*n} wegnehmen.`
-    };
-    const split = {3:2, 4:2, 6:5, 7:5, 8:5, 9:5}[m] || 0;
-    return { m, n, text: T[m], split };
-  }
+  function makeOptions(c){ return shuffle([up(c), ...shuffle([...CONF[c]]).slice(0,3)]); }
 
   /* ---------- round ---------- */
   let round = null;
   const MSG = {
-    intro: ['Welche Zahl trifft?','Ziel anvisieren …','Konzentrier dich, Ninja.','Du schaffst das.','Ruhig atmen. Dann werfen.'],
+    intro: ['Welcher große Buchstabe passt?','Ziel anvisieren …','Konzentrier dich, Ninja.','Du schaffst das.','Genau hinschauen. Dann werfen.'],
     ok: ['Treffer!','Volltreffer!','Lautlos und schnell!','Wie ein Schatten!','Genau ins Ziel!','Ninja-Blick!'],
-    wrong: ['Fast! Jeder Ninja trainiert. Schau mal:','Knapp daneben. Mit dem Trick klappt es:','Gut, dass das passiert. So lernst du es:','Nochmal zielen. Hier ist ein Trick:'],
-    come: ['Comeback! Die sitzt jetzt.','Stark! Vorhin knapp, jetzt sicher.','Comeback! So wird man Meister.']
+    wrong: ['Fast! Jeder Ninja trainiert. Schau mal:','Knapp daneben. Mit dem Bild klappt es:','Gut, dass das passiert. So lernst du es:','Nochmal zielen. Hier ist ein Tipp:'],
+    come: ['Comeback! Der sitzt jetzt.','Stark! Vorhin knapp, jetzt sicher.','Comeback! So wird man Meisterin.']
   };
 
-  function makeItem(r,k,base,repeat=false){
-    const [a,b] = Math.random() < .5 ? [k,r] : [r,k];
-    return { r, k, a, b, ans: r*k, key: fkey(r,k), base, repeat, opts: makeOptions(r,k) };
+  function makeItem(c,base,repeat=false){
+    return { c, ans: up(c), key: c, base, repeat, opts: makeOptions(c) };
   }
 
+  // Groups have only 2–3 letters, so letters repeat within a round; never the same one twice in a row.
   function buildRound(){
-    const seen = new Set(), pool = [];
-    for (const r of selected) for (let k=1;k<=10;k++){
-      const key = fkey(r,k); if (seen.has(key)) continue; seen.add(key);
-      pool.push({ r, k, w: 4 - lvl(r,k) });
-    }
+    const pool = selected.flatMap(g => [...GROUPS[g]]).map(c => ({ c, w: 4 - lvl(c) }));
     const out = [];
-    while (out.length < 10 && pool.length){
-      const tot = pool.reduce((s,c)=>s+c.w,0);
+    while (out.length < 10){
+      const cand = pool.length > 1 ? pool.filter(p => p.c !== out[out.length-1]) : pool;
+      const tot = cand.reduce((s,p)=>s+p.w,0);
       let x = Math.random()*tot, i = 0;
-      for (; i < pool.length; i++){ x -= pool[i].w; if (x <= 0) break; }
-      out.push(pool.splice(Math.min(i, pool.length-1),1)[0]);
+      for (; i < cand.length; i++){ x -= cand[i].w; if (x <= 0) break; }
+      const p = cand[Math.min(i, cand.length-1)];
+      out.push(p.c);
+      p.w = Math.max(1, p.w - 1);
     }
-    return out.map(c => makeItem(c.r, c.k, true));
+    return out.map(c => makeItem(c, true));
   }
 
   function show(id){ ['dojo','game','result','master'].forEach(s => $('#'+s).hidden = s !== id); window.scrollTo(0,0); }
@@ -593,7 +576,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   function startRound(){
     const total = totalStars();
     round = {
-      queue: buildRound(), idx: 0, lit: 0, points: 0, comebacks: 0, clean: 0, repeats: 0,
+      queue: buildRound(), idx: 0, lit: 0, points: 0, comebacks: 0, clean: 0, repeats: 0, learned: new Set(),
       beltBefore: beltFor(total),
       starsBefore: Object.fromEntries(selected.map(r => [r, starsFor(r)])),
       progBefore: Object.fromEntries(selected.map(r => [r, rowProgress(r)]))
@@ -611,7 +594,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     const it = cur();
     it.tries = 0; it.hintUsed = false; it.done = false;
     $('#tag').hidden = !it.repeat;
-    $('#eq').innerHTML = `<span>${it.a}</span><span class="op">·</span><span>${it.b}</span><span class="op">=</span><span class="slot" id="slot">?</span>`;
+    $('#eq').innerHTML = `<span>${it.c}</span><span class="op">→</span><span class="slot" id="slot">?</span>`;
     const box = $('#answers'); box.innerHTML = '';
     it.opts.forEach(v => {
       const b = document.createElement('button');
@@ -621,15 +604,16 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     });
     $('#hint').hidden = true;
     $('#trickBtn').hidden = false;
-    say(it.repeat ? 'Die kam vorhin schon. Jetzt zeigst du es ihr!' : pickOne(MSG.intro));
+    say(it.repeat ? 'Der kam vorhin schon. Jetzt zeigst du es ihm!' : pickOne(MSG.intro));
   }
 
   function scheduleRepeat(it){
     if (round.repeats >= 4) return false;
-    const pending = round.queue.slice(round.idx+1).some(q => q.key === it.key);
-    if (pending) return true;
+    // The letter may come up again anyway: that turn becomes the comeback chance.
+    const pending = round.queue.slice(round.idx+1).find(q => q.key === it.key);
+    if (pending){ pending.repeat = true; return true; }
     const pos = Math.min(round.idx + 3, round.queue.length);
-    round.queue.splice(pos, 0, makeItem(it.r, it.k, false, true));
+    round.queue.splice(pos, 0, makeItem(it.c, false, true));
     round.repeats++;
     return true;
   }
@@ -646,14 +630,15 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
       ninjaAnim('hop'); sfx.ok();
       const first = it.tries === 0;
       if (first){
-        if (!it.hintUsed) setLvl(it.key, lvl(it.r,it.k) + 1);
+        // One step per letter and round, so a small group can't fill up in a single round.
+        if (!it.hintUsed && !round.learned.has(it.c)){ setLvl(it.c, lvl(it.c) + 1); round.learned.add(it.c); }
         round.points += 10; round.clean++;
         if (it.repeat){ round.comebacks++; say(pickOne(MSG.come)); }
         else say(it.hintUsed ? 'Treffer mit Trick! Gut gemacht.' : pickOne(MSG.ok));
       } else {
         round.points += 5;
         const again = round.queue.slice(round.idx+1).some(q => q.key === it.key);
-        say(again ? 'Geschafft! Sie kommt gleich nochmal, zum Festigen.' : 'Geschafft! Merk sie dir gut.');
+        say(again ? 'Geschafft! Er kommt gleich nochmal, zum Festigen.' : 'Geschafft! Merk ihn dir gut.');
       }
       $('#pts').textContent = round.points;
       if (it.base){
@@ -668,41 +653,24 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
       btn.disabled = true; btn.classList.add('tried','wobble');
       ninjaAnim('think'); sfx.soft();
       if (it.tries === 1){
-        setLvl(it.key, lvl(it.r,it.k) - 1);
+        setLvl(it.c, lvl(it.c) - 1);
         scheduleRepeat(it);
         say(pickOne(MSG.wrong));
-        showHint(it, 1);
+        showHint(it);
       } else {
-        say('Ich zeig dir, wo sie steckt. Zähl mal mit!');
-        showHint(it, 2);
-        $$('#answers .ans').forEach(b => { if (+b.dataset.v === it.ans) b.classList.add('reveal'); });
+        say('Ich zeig dir, wo er steckt!');
+        showHint(it);
+        $$('#answers .ans').forEach(b => { if (b.dataset.v === it.ans) b.classList.add('reveal'); });
       }
     }
   }
 
-  function showHint(it, stage){
-    const t = trick(it.a, it.b);
-    $('#trickText').textContent = t.text;
-    $('#gridText').textContent = `${t.m} ${t.m === 1 ? 'Reihe' : 'Reihen'} mit je ${t.n} ${t.n === 1 ? 'Punkt' : 'Punkten'}`;
-    const g = $('#grid'); g.innerHTML = '';
+  function showHint(it){
+    const [emo, word] = WORDS[it.c];
+    $('#hintEmo').textContent = emo;
+    $('#hintWord').innerHTML = `<b>${word[0]}</b>${word.slice(1)}`;
+    $('#hintText').textContent = `${word} fängt mit ${it.ans} an. Klein geschrieben: ${it.c}`;
     const hint = $('#hint'); hint.hidden = false;
-    const w = g.clientWidth || 300;
-    const reserve = stage === 2 ? 56 : 10;
-    const d = Math.max(8, Math.min(22, Math.floor((w - reserve - 7 - (t.n-1)*3) / t.n)));
-    g.style.setProperty('--d', d + 'px');
-    for (let i=0;i<t.m;i++){
-      const row = document.createElement('div'); row.className = 'row';
-      for (let j=0;j<t.n;j++){
-        const dot = document.createElement('span');
-        dot.className = 'dot' + (t.split && i >= t.split ? ' b' : '');
-        row.appendChild(dot);
-      }
-      if (stage === 2){
-        const s = document.createElement('span'); s.className = 'sum'; s.textContent = (i+1)*t.n;
-        row.appendChild(s);
-      }
-      g.appendChild(row);
-    }
     $('#trickBtn').hidden = true;
     if (!reduce) hint.scrollIntoView({ block:'nearest', behavior:'smooth' });
   }
@@ -710,8 +678,8 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   $('#trickBtn').addEventListener('click', () => {
     const it = cur(); if (!it || it.done) return;
     if (it.tries === 0) it.hintUsed = true;
-    say('Hier ist mein Geheim-Trick:');
-    showHint(it, 1);
+    say('Hier ist mein Geheim-Tipp:');
+    showHint(it);
   });
 
   function throwShuriken(target, done){
@@ -745,11 +713,11 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     $('#resSub').textContent = round.clean >= 9 ? 'Was für ein Wurf. Du bist ein Schatten-Ninja.' : 'Starkes Training. Jede Runde macht dich schneller.';
     const note = $('#note');
     if (round.comebacks > 0){
-      note.innerHTML = `<p>${round.comebacks} ${round.comebacks === 1 ? 'Aufgabe hast' : 'Aufgaben hast'} du heute neu gelernt.</p><p>Erst daneben, später getroffen. So trainieren echte Ninjas.</p>`;
+      note.innerHTML = `<p>${round.comebacks} Buchstaben hast du heute neu gelernt.</p><p>Erst daneben, später getroffen. So trainieren echte Ninjas.</p>`;
     } else if (errs > 0){
-      note.innerHTML = `<p>Ein paar Aufgaben waren knifflig. Die kommen nächstes Mal öfter dran, bis sie sitzen.</p>`;
+      note.innerHTML = `<p>Ein paar Buchstaben waren knifflig. Die kommen nächstes Mal öfter dran, bis sie sitzen.</p>`;
     } else {
-      note.innerHTML = `<p>Kein einziger Wurf daneben. Probier doch mal eine schwerere Reihe!</p>`;
+      note.innerHTML = `<p>Kein einziger Wurf daneben. Probier doch mal eine schwerere Gruppe!</p>`;
     }
     const gains = selected.map(r => ({ r, b: round.starsBefore[r] ?? 0, a: starsFor(r), pb: round.progBefore[r] ?? 0, pa: rowProgress(r) }))
       .filter(g => g.pa > g.pb);
@@ -757,7 +725,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
       const txt = g.a > g.b
         ? (g.a - g.b === 1 ? 'ein neues Shuriken' : (g.a - g.b) + ' neue Shuriken')
         : `nächstes Shuriken zu ${Math.round(nextFrac(g.r)*100)} %`;
-      return `<div class="gain">${SHU}<span>${g.r}er-Reihe: ${txt}</span></div>`;
+      return `<div class="gain">${SHU}<span>${spaced(g.r)}: ${txt}</span></div>`;
     }).join('');
     const up = after.min > round.beltBefore.min;
     $('#beltUp').hidden = !up;
@@ -836,7 +804,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
   for (let r=1;r<=10;r++){
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'tile'; b.dataset.r = r;
-    b.innerHTML = `<span class="n">${r}</span><span class="er">${r}er</span><span class="stars"></span><span class="prog" aria-hidden="true"><i></i></span>`;
+    b.innerHTML = `<span class="n">${spaced(r)}</span><span class="er">${spaced(r, up)}</span><span class="stars"></span><span class="prog" aria-hidden="true"><i></i></span>`;
     b.addEventListener('click', () => {
       selected = selected.includes(r) ? selected.filter(x => x !== r) : [...selected, r].sort((x,y)=>x-y);
       store.set('buchstaben.sel', selected); renderDojo();
@@ -856,24 +824,24 @@ body.master .moon{box-shadow:0 0 60px rgba(255,216,74,.45)}
     if (ni < BELTS.length){
       const nb = BELTS[ni], need = nb.min - total;
       $('#beltNext').textContent = `Noch ${need} Shuriken bis zum ${nb.dat} Gürtel`;
-      let prog = 0; for (let r=1;r<=10;r++) prog += rowProgress(r);
+      let prog = 0; for (let g=1;g<=10;g++) prog += rowProgress(g);
       $('#beltFill').style.width = (Math.max(0, Math.min(1, (prog - b.min) / (nb.min - b.min))) * 100) + '%';
     } else {
-      $('#beltNext').textContent = 'Großmeister! Das ganze Einmaleins sitzt.';
+      $('#beltNext').textContent = 'Großmeisterin! Alle Buchstaben sitzen.';
       $('#beltFill').style.width = '100%';
     }
     $$('.tile').forEach(t => {
       const r = +t.dataset.r, s = starsFor(r);
       t.setAttribute('aria-pressed', selected.includes(r) ? 'true' : 'false');
-      t.setAttribute('aria-label', `${r}er-Reihe, ${s} von 3 Shuriken`);
+      t.setAttribute('aria-label', `Buchstaben ${spaced(r)}, ${s} von 3 Shuriken`);
       t.querySelector('.stars').innerHTML = [0,1,2].map(i => SHU_STAR(i < s ? 'on' : '')).join('');
       t.querySelector('.prog i').style.width = (nextFrac(r) * 100) + '%';
     });
     const sb = $('#startBtn');
     sb.disabled = selected.length === 0;
     $('#startHint').textContent = selected.length
-      ? `${selected.map(r=>r+'er').join(', ')} · 10 Laternen anzünden`
-      : 'Tippe mindestens eine Reihe an';
+      ? `${selected.map(g => spaced(g)).join('  ·  ')} · 10 Laternen anzünden`
+      : 'Tippe mindestens eine Gruppe an';
   }
 
   $('#startBtn').addEventListener('click', startRound);
