@@ -4,5 +4,5 @@ Buchstaben-Dojo: Kleinbuchstaben lernen. Ein kleiner Buchstabe wird angezeigt, a
 
 Ableger von [einmaleins](https://github.com/florianheinemann/einmaleins) (gleiches Dojo mit Ninja, Laternen, Shuriken und Gürteln).
 
-Die zehn Felder sind Buchstaben-Gruppen von leicht nach schwer:
-c o s · u v w · x z k (gleiche Form) · p j y · i l t · f m n (ähnlich) · a e r · g h (ganz anders) · b d q (Spiegel) · ä ö ü
+Sechs Buchstaben-Gruppen mit je 5 Shuriken, in der typischen Fibel-Reihenfolge:
+m a l i o · e s r n t · u h d f w · k p b g z · ä ö ü j v · c q x y

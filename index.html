@@ -93,7 +93,7 @@ button:focus-visible{outline:3px solid var(--lantern);outline-offset:3px}
 .track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lantern-deep),var(--lantern));border-radius:99px;transition:width .6s ease}
 .belt-next{margin:0;color:var(--mist);font-weight:700;font-size:.92rem}
 
-.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .tile{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--night-2);border:2px solid var(--line);border-radius:14px;padding:10px 2px 8px;transition:background .15s,transform .1s}
 .tile:active{transform:scale(.96)}
 .tile .n{font-family:var(--f-letter);font-weight:700;font-size:1.45rem;line-height:1;white-space:nowrap;letter-spacing:.04em}
@@ -268,9 +268,9 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
       <p class="label">Welche Buchstaben trainierst du?</p>
       <div class="tiles" id="tiles"></div>
       <div class="chips">
-        <button type="button" class="chip" data-set="1,2,3">Start: gleiche Form</button>
-        <button type="button" class="chip" data-set="7,8,9">Profi: ganz anders</button>
-        <button type="button" class="chip" data-set="1,2,3,4,5,6,7,8,9,10">Alle Buchstaben</button>
+        <button type="button" class="chip" data-set="1">Start: m a l i o</button>
+        <button type="button" class="chip" data-set="1,2,3">Die ersten drei</button>
+        <button type="button" class="chip" data-set="1,2,3,4,5,6">Alle Buchstaben</button>
       </div>
     </div>
 
@@ -283,11 +283,11 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
       <summary>Für Eltern: So lernt das Dojo</summary>
       <ul>
         <li>Oben steht ein kleiner Buchstabe, darunter vier große. Sie tippt den großen Buchstaben an, der dazu gehört.</li>
-        <li>Die zehn Felder sind Buchstaben-Gruppen, sortiert von leicht nach schwer: Zuerst kommen Buchstaben, die klein fast genauso aussehen wie groß (c → C, o → O). Danach welche, die nur ähnlich sind (i, l, t, f, m, n). Am Ende die, die ganz anders aussehen (a, e, r, g, h), die Spiegel-Buchstaben b, d, q und die Umlaute.</li>
+        <li>Die sechs Felder sind Buchstaben-Gruppen in der Reihenfolge, in der sie meist in der Fibel drankommen: zuerst m, a, l, i, o, dann e, s, r, n, t und so weiter. Seltene Buchstaben wie c, q, x und y kommen zum Schluss.</li>
         <li>Die falschen Antworten sind typische Verwechsler: bei b etwa D, P und Q, bei l das große I. Raten hilft kaum, genau Hinschauen schon.</li>
         <li>Fehler kosten nichts. Nach einem Fehler zeigt der Ninja ein Bild mit Anlaut, zum Beispiel 🐒 Affe für a. Beim zweiten Fehler leuchtet die richtige Antwort.</li>
         <li>Ein falsch gelöster Buchstabe kommt zwei, drei Aufgaben später als „Comeback-Chance“ zurück. Trifft sie ihn dann, zählt das als Comeback.</li>
-        <li>Buchstaben, die noch nicht sitzen, kommen häufiger dran. Shuriken (bis zu 3 pro Gruppe) zeigen, wie sicher eine Gruppe sitzt. Pro Runde kann jeder Buchstabe nur einmal dazulernen, damit die Shuriken nicht in einer einzigen Runde voll werden.</li>
+        <li>Buchstaben, die noch nicht sitzen, kommen häufiger dran. Shuriken (bis zu 5 pro Gruppe) zeigen, wie sicher eine Gruppe sitzt. Pro Runde kann jeder Buchstabe nur einmal dazulernen, damit die Shuriken nicht in einer einzigen Runde voll werden.</li>
         <li>Mit allen 30 Shuriken gibt es den goldenen Gürtel und eine Großmeisterin-Urkunde. Der bleibt für immer. Nur „Fortschritt zurücksetzen“ löscht ihn.</li>
         <li>Der Fortschritt bleibt in diesem Browser auf diesem Gerät gespeichert.</li>
       </ul>
@@ -393,12 +393,13 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
   };
 
   let levels = store.get('buchstaben.levels', {}) || {};
-  let selected = store.get('buchstaben.sel', [1,2,3]);
-  if (!Array.isArray(selected) || !selected.length) selected = [1,2,3];
+  let selected = store.get('buchstaben.sel', [1]);
+  if (Array.isArray(selected)) selected = selected.filter(g => g >= 1 && g <= 6);
+  if (!Array.isArray(selected) || !selected.length) selected = [1];
   let muted = !!store.get('buchstaben.muted', false);
   let master = store.get('buchstaben.master', null);   // {date, name}: set once all 30 shuriken are reached, never lost by mistakes
 
-  const VERSION = '1.0.2';
+  const VERSION = '1.1.0';
 
   // No zooming: iOS ignores user-scalable=no, so also block pinch gestures (double-tap zoom is off via touch-action).
   ['gesturestart','gesturechange','gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive:false }));
@@ -482,8 +483,10 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
   renderSound();
 
   /* ---------- letters ---------- */
-  // Ten groups, easy to hard: same shape small and big, similar, completely different, mirror letters, umlauts.
-  const GROUPS = { 1:'cos', 2:'uvw', 3:'xzk', 4:'pjy', 5:'ilt', 6:'fmn', 7:'aer', 8:'gh', 9:'bdq', 10:'äöü' };
+  // Six groups in the usual primer order: frequent letters first, rare ones (c q x y) last.
+  const GROUPS = { 1:'malio', 2:'esrnt', 3:'uhdfw', 4:'kpbgz', 5:'äöüjv', 6:'cqxy' };
+  const NG = Object.keys(GROUPS).length;
+  const STARS = 5;   // per group: 6 groups × 5 = 30 shuriken, as in the 1×1
   // Distractors: capitals a child is likely to mistake for the right one (shape of the small letter, mirror images, I for l).
   const CONF = {
     a:'OEDQ', b:'DPQH', c:'OGES', d:'BPQO', e:'OCAF', f:'TEPI', g:'QJPY', h:'NKBM', i:'LJTY',
@@ -506,12 +509,12 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
   const lvl = c => levels[c] || 0;
   const setLvl = (c, v) => { levels[c] = Math.max(0, Math.min(3, v)); store.set('buchstaben.levels', levels); };
   function rowSum(g){ let s = 0; for (const c of GROUPS[g]) s += lvl(c); return s; }
-  // Like the 1×1: 90 % of the maximum (3 per letter) gives all 3 shuriken.
-  function rowProgress(g){ return Math.min(3, rowSum(g) / (GROUPS[g].length * .9) + 1e-9); }
+  // Like the 1×1: 90 % of the maximum (3 per letter) gives all shuriken.
+  function rowProgress(g){ return Math.min(STARS, rowSum(g) / (GROUPS[g].length * 3 * .9) * STARS + 1e-9); }
   function starsFor(g){ return Math.floor(rowProgress(g)); }
-  // Fractional shuriken (0–3) so progress shows before a whole shuriken is earned.
-  function nextFrac(g){ const p = rowProgress(g); return p >= 3 ? 1 : p - Math.floor(p); }
-  function totalStars(){ let t = 0; for (let g=1;g<=10;g++) t += starsFor(g); return t; }
+  // Fractional shuriken (0–5) so progress shows before a whole shuriken is earned.
+  function nextFrac(g){ const p = rowProgress(g); return p >= STARS ? 1 : p - Math.floor(p); }
+  function totalStars(){ let t = 0; for (let g=1;g<=NG;g++) t += starsFor(g); return t; }
   function beltFor(t){ if (master) return GOLD; let b = BELTS[0]; for (const x of BELTS) if (t >= x.min) b = x; return b; }
   function applyBelt(b){
     const s = document.documentElement.style; s.setProperty('--belt', b.color); s.setProperty('--belt-edge', b.edge);
@@ -797,7 +800,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
 
   /* ---------- dojo ---------- */
   const tiles = $('#tiles');
-  for (let r=1;r<=10;r++){
+  for (let r=1;r<=NG;r++){
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'tile'; b.dataset.r = r;
     b.innerHTML = `<span class="n">${spaced(r)}</span><span class="er">${spaced(r, up)}</span><span class="stars"></span><span class="prog" aria-hidden="true"><i></i></span>`;
@@ -820,7 +823,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
     if (ni < BELTS.length){
       const nb = BELTS[ni], need = nb.min - total;
       $('#beltNext').textContent = `Noch ${need} Shuriken bis zum ${nb.dat} Gürtel`;
-      let prog = 0; for (let g=1;g<=10;g++) prog += rowProgress(g);
+      let prog = 0; for (let g=1;g<=NG;g++) prog += rowProgress(g);
       $('#beltFill').style.width = (Math.max(0, Math.min(1, (prog - b.min) / (nb.min - b.min))) * 100) + '%';
     } else {
       $('#beltNext').textContent = 'Großmeisterin! Alle Buchstaben sitzen.';
@@ -829,8 +832,8 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
     $$('.tile').forEach(t => {
       const r = +t.dataset.r, s = starsFor(r);
       t.setAttribute('aria-pressed', selected.includes(r) ? 'true' : 'false');
-      t.setAttribute('aria-label', `Buchstaben ${spaced(r)}, ${s} von 3 Shuriken`);
-      t.querySelector('.stars').innerHTML = [0,1,2].map(i => SHU_STAR(i < s ? 'on' : '')).join('');
+      t.setAttribute('aria-label', `Buchstaben ${spaced(r)}, ${s} von ${STARS} Shuriken`);
+      t.querySelector('.stars').innerHTML = [...Array(STARS).keys()].map(i => SHU_STAR(i < s ? 'on' : '')).join('');
       t.querySelector('.prog i').style.width = (nextFrac(r) * 100) + '%';
     });
     const sb = $('#startBtn');
