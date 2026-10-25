@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@700&family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@700&text=l&display=swap">
 </head>
 <body>
 <style>
@@ -31,8 +32,9 @@
   --belt:#f5f3ea; --belt-edge:#bdb8a6;
   --f-display:"Dela Gothic One","Arial Black",Impact,system-ui,sans-serif;
   --f-body:"M PLUS Rounded 1c","Nunito","Trebuchet MS",system-ui,sans-serif;
-  /* Letters in school print: single-storey a and g, l and I clearly different. */
-  --f-letter:"Andika","Comic Sans MS",system-ui,sans-serif;
+  /* Letters in school print: single-storey a and g from Andika. Andika's l is a bare stroke,
+     so only the l comes from Atkinson Hyperlegible (font subset text=l), which has a tail like school print. */
+  --f-letter:"Atkinson Hyperlegible","Andika","Comic Sans MS",system-ui,sans-serif;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -174,6 +176,7 @@ details.parents li{color:var(--ink)}
 .pic{display:flex;align-items:center;gap:14px}
 .pic .emo{font-size:3.2rem;line-height:1;flex:none}
 .pic .word{font-family:var(--f-letter);font-weight:700;font-size:2.2rem;line-height:1.1;letter-spacing:.03em;overflow-wrap:anywhere}
+.ltr{font-family:var(--f-letter);font-weight:700;letter-spacing:.04em}
 .pic .word b{color:var(--lantern-deep)}
 
 .shuriken-fly{position:fixed;left:0;top:0;width:26px;height:26px;pointer-events:none;z-index:50;color:var(--suit)}
@@ -399,7 +402,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
   let muted = !!store.get('buchstaben.muted', false);
   let master = store.get('buchstaben.master', null);   // {date, name}: set once all 30 shuriken are reached, never lost by mistakes
 
-  const VERSION = '1.1.0';
+  const VERSION = '1.1.1';
 
   // No zooming: iOS ignores user-scalable=no, so also block pinch gestures (double-tap zoom is off via touch-action).
   ['gesturestart','gesturechange','gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive:false }));
@@ -668,7 +671,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
     const [emo, word] = WORDS[it.c];
     $('#hintEmo').textContent = emo;
     $('#hintWord').innerHTML = `<b>${word[0]}</b>${word.slice(1)}`;
-    $('#hintText').textContent = `${word} fängt mit ${it.ans} an. Klein geschrieben: ${it.c}`;
+    $('#hintText').innerHTML = `${word} fängt mit <span class="ltr">${it.ans}</span> an. Klein geschrieben: <span class="ltr">${it.c}</span>`;
     const hint = $('#hint'); hint.hidden = false;
     $('#trickBtn').hidden = true;
     if (!reduce) hint.scrollIntoView({ block:'nearest', behavior:'smooth' });
@@ -724,7 +727,7 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
       const txt = g.a > g.b
         ? (g.a - g.b === 1 ? 'ein neues Shuriken' : (g.a - g.b) + ' neue Shuriken')
         : `nächstes Shuriken zu ${Math.round(nextFrac(g.r)*100)} %`;
-      return `<div class="gain">${SHU}<span>${spaced(g.r)}: ${txt}</span></div>`;
+      return `<div class="gain">${SHU}<span><span class="ltr">${spaced(g.r)}</span>: ${txt}</span></div>`;
     }).join('');
     const up = after.min > round.beltBefore.min;
     $('#beltUp').hidden = !up;
@@ -838,8 +841,8 @@ body.master .moon{box-shadow:0 0 60px rgba(255,255,255,.95),0 0 0 4px #e8b923}
     });
     const sb = $('#startBtn');
     sb.disabled = selected.length === 0;
-    $('#startHint').textContent = selected.length
-      ? `${selected.map(g => spaced(g)).join('  ·  ')} · 10 Laternen anzünden`
+    $('#startHint').innerHTML = selected.length
+      ? `<span class="ltr">${selected.map(g => spaced(g)).join('  ·  ')}</span> · 10 Laternen anzünden`
       : 'Tippe mindestens eine Gruppe an';
   }
 
